@@ -32,10 +32,11 @@
 }
 
 /* add credit card form */
-input {
-    border:1px solid #ddd;
-    border-right:none;
+ input {
+    border: 1px solid #ddd;
+    border-right: none;
     float: left;
+    /* padding: 0 0 18px 0px; */
 }
 .add-credit-card-form span img {
     float: right;
@@ -61,10 +62,11 @@ input {
     color:#000000;
     padding-top: 20px;
 }
-.add-credit-card-form .form-control{
-    border:1px solid #D7D2BD;
-    padding: 20px 0px;
+.add-credit-card-form div .form-control{
+    border:1px solid #D7D2BD !important;
+    padding: 20px 10px;
     border-radius: 1px;
+    font-size: 20px;
 }
 .savecardtolist{
     color:#4D4D4D;

@@ -1,61 +1,38 @@
 import React from "react";
+import image1 from "../cab_images/logo.png";
 import { useState, useEffect } from "react";
+import { Link } from "react-router-dom";
 import axios from "axios";
-import { useNavigate } from "react-router-dom";
+import AddressFromLatLng from "./AddressFromLatLong";
 import Upcoming from "./HistoryStages/Upcoming";
 import Past from "./HistoryStages/Past";
 import Cancel from "./HistoryStages/Cancel";
 import "../CssStyle/History.css";
 
 const History = () => {
-  const URL =
-    "https://chauffer-staging-tse4a.ondigitalocean.app/v1/ride/allRide";
+  const URL = "https://chauffer-staging-tse4a.ondigitalocean.app/v1/ride/allRide";
   const token = localStorage.getItem("token");
   const [rideData, setRideData] = useState(null);
-  const navigate = useNavigate();
-
-  const headers = {
-    "Content-Type": "application/json",
-    token: token,
-  };
-
-  useEffect(() => {
-    const fetchData = async () => {
-      try {
-        if (token) {
-          const response = await axios.get(URL, {
-            method: "GET",
-            headers: headers,
-          });
-          console.error("response for ride", response);
-          setRideData(response.data.items);
-        } else {
-          navigate("/login", { state: { from: "/history" } });
-        }
-      } catch (error) {
-        console.error("Error fetching data:", error);
-      }
-    };
-
-    fetchData();
-  }, []);
+  const [latitude, setLatitude] = useState(null);
+  const [longitude, setLongitude] = useState(null);
+  const [pickUpLocation, setpickUpLocation] = useState("");
 
   const [currentPage, setCurrentPage] = useState("home");
 
   const renderPage = () => {
     switch (currentPage) {
       case "upcoming":
-        return <Upcoming rideData={rideData} />;
+        return <Upcoming />;
       case "past":
-        return <Past rideData={rideData} />;
+        return <Past />;
       case "cancel":
-        return <Cancel rideData={rideData} />;
+        return <Cancel />;
       default:
-        return <Upcoming rideData={rideData} />;
+        return <Upcoming />;
     }
   };
 
-  const handlePageChange = (e, page) => {
+  const handlePageChange = (e,page) => {
     e.preventDefault();
     setCurrentPage(page);
   };
@@ -63,24 +40,18 @@ const History = () => {
   return (
     <div className="history-container">
       <header>
-        <nav className="">
+        <nav className="history-nav">
           <ul className="tab-bar">
             <li
               className="nav-item"
-              onClick={(e) => handlePageChange(e, "upcoming")}
+              onClick={(e) => handlePageChange(e,"upcoming")}
             >
               Upcoming
             </li>
-            <li
-              className="nav-item"
-              onClick={(e) => handlePageChange(e, "past")}
-            >
+            <li className="nav-item" onClick={(e) => handlePageChange(e,"past")}>
               Past
             </li>
-            <li
-              className="nav-item"
-              onClick={(e) => handlePageChange(e, "cancel")}
-            >
+            <li className="nav-item" onClick={(e) => handlePageChange(e,"cancel")}>
               Cancel
             </li>
           </ul>

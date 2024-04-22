@@ -77,8 +77,8 @@ const Pickup = ({handleNextButon ,handlePreviousButton}) => {
             </div>
             { selectedRadio === "option2" ?
               <div className="row">
-                <div className=" m-auto ">
-                  <form className=" p-5 mb-5 ">
+                <div className="someone-else m-auto ">
+                  <form className="p-3 mt-3 ">
                     <div className="row">
                       <div className="col mt-2">
                         <label htmlFor="firstname" className="form-label">
@@ -150,7 +150,7 @@ const Pickup = ({handleNextButon ,handlePreviousButton}) => {
               </div>:
               <></>
             }
-            <div className="provide-additional-form-container">
+            <div className="provide-additional-form-container p-3">
               <p className="booking-form">Provide additional information</p>
               <p className="flight-number">
                 Enter the flight number to ensure the chauffeur brings the guest

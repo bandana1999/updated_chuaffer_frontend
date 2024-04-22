@@ -8,25 +8,28 @@ import car1 from "../cabimages-22/bus_1.jpg";
 import ourservices1 from "../cabimages-22/1.jpg";
 import ourservices2 from "../cabimages-22/2.jpg";
 import ourservices3 from "../cabimages-22/3.jpg";
+import location from "../cab_images/location.png";
+import calender from "../cab_images/calender.png";
 import { useNavigate } from "react-router-dom";
 import "../CssStyle/Headers.css";
 import "bootstrap/dist/css/bootstrap.min.css";
 import google from "../cab_images/googleAppimg.png";
 import Footer from "../Shared/Footer";
 import Header from "./Header";
-import axios from "axios";
-import {  LoadScript, Autocomplete } from "@react-google-maps/api"
+import { LoadScript, Autocomplete } from "@react-google-maps/api";
+import DatePicker from "react-datepicker";
+import "react-datepicker/dist/react-datepicker.css";
+
 const categories = ["Ride", "Comfort", "City to city", "Airport Transfer"];
 
 function Home() {
   const navigate = useNavigate();
   const token = localStorage.getItem("token");
-  const [coordinates ,setCoordinates ] = useState({
-    pickUpLocation: "",
-    dropLocation:"",
-  })
+  // const [address, setAddress] = useState("");
+  // const [coordinates, setCoordinates] = useState(null);
 
   const YOUR_GOOGLE_MAPS_API_KEY = "AIzaSyCZ0UycRv9Fy9PMDBY-uoU_SkXZGnmjP18";
+
   const [isLogin, setIsLogin] = useState(false);
 
   useEffect(() => {
@@ -38,7 +41,6 @@ function Home() {
       console.log("islogin", isLogin);
     }
   }, []);
-
 
   // Function to get the current date in the format YYYY-MM-DD
   const getCurrentDateTime = () => {
@@ -54,39 +56,38 @@ function Home() {
   const [Info, setInfo] = useState({
     pickUpLocation: "",
     dropLocation: "",
-    dateTime: getCurrentDateTime(),
+    dateTime: "",
     category: "",
   });
 
-  const handlePlaceSelect = (place ,name) => {
+  const handlePlaceSelect = (place, name) => {
+    // setAddress(place.formatted_address);
     const { lat, lng } = place.geometry.location;
-    setInfo(Info =>({ ...Info, [name] : place.formatted_address}));
-    setCoordinates(prevCoordinates =>({...prevCoordinates , [name] : `${lat()},${lng()}` }))
+    // setCoordinates({ lat: lat(), lng: lng() })
+    setInfo((Info) => ({ ...Info, [name]: place.formatted_address }));
+    console.log("name from google adrress", Info);
     console.log("Selected place:", place.formatted_address);
-    console.log('Coordinates:name', `${name} ${lat()},${lng()}` );
+    console.log("Coordinates:", `${lat()},${lng()}`);
   };
-
 
   const handleChange = (e) => {
     setInfo({ ...Info, [e.target.name]: e.target.value });
   };
-
+  const handleDate = (date, name) => {
+    setInfo({ ...Info, [name]: date });
+  };
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
       const userData = {
         pickUpLocation: Info.pickUpLocation,
         dropLocation: Info.dropLocation,
-        pickUpLocationCoordinates: coordinates.pickUpLocation,
-        dropLocationCoordinates: coordinates.dropLocation,
         dateTime: Info.dateTime,
         category: Info.category,
       };
 
       localStorage.setItem("pickUpLocation", userData.pickUpLocation);
       localStorage.setItem("dropLocation", userData.dropLocation);
-      localStorage.setItem("pickUpLocationCoordinates", userData.pickUpLocationCoordinates);
-      localStorage.setItem("dropLocationCoordinates", userData.dropLocationCoordinates);
       localStorage.setItem("dateTime", userData.dateTime);
       localStorage.setItem("category", userData.category);
 
@@ -128,25 +129,33 @@ function Home() {
               <div className="col-md-3 form-contain">
                 <label className="form-label ">From</label>
                 <LoadScript
-                  googleMapsApiKey= {YOUR_GOOGLE_MAPS_API_KEY} 
+                  googleMapsApiKey={YOUR_GOOGLE_MAPS_API_KEY}
                   libraries={["places"]}
                 >
                   <Autocomplete
                     onLoad={(autocomplete) => {
                       autocomplete.addListener("place_changed", () =>
-                        handlePlaceSelect(autocomplete.getPlace(),"pickUpLocation")
+                        handlePlaceSelect(
+                          autocomplete.getPlace(),
+                          "pickUpLocation"
+                        )
                       );
                     }}
                   >
-                    <input
-                      type="text"
-                      className="form-control input-text"
-                      placeholder="Address"
-                      name="pickUpLocation"
-                      value={Info.pickUpLocation}
-                      onChange={handleChange}
-                      required
-                    />
+                    <div className="input-div">
+                      <span>
+                        <img src={location} alt="not found" />
+                      </span>
+                      <input
+                        type="text"
+                        className="form-control input-text"
+                        placeholder="Address"
+                        name="pickUpLocation"
+                        value={Info.pickUpLocation}
+                        onChange={handleChange}
+                        required
+                      />
+                    </div>
                   </Autocomplete>
                 </LoadScript>
               </div>
@@ -155,26 +164,34 @@ function Home() {
                   To
                 </label>
                 <LoadScript
-                  googleMapsApiKey={YOUR_GOOGLE_MAPS_API_KEY} 
+                  googleMapsApiKey={YOUR_GOOGLE_MAPS_API_KEY}
                   libraries={["places"]}
                 >
                   <Autocomplete
                     onLoad={(autocomplete) => {
                       autocomplete.addListener("place_changed", () =>
-                        handlePlaceSelect(autocomplete.getPlace(),"dropLocation")
+                        handlePlaceSelect(
+                          autocomplete.getPlace(),
+                          "dropLocation"
+                        )
                       );
                     }}
                   >
-                <input
-                  type="text"
-                  className="form-control input-text"
-                  placeholder="Address"
-                  name="dropLocation"
-                  value={Info.dropLocation}
-                  onChange={handleChange}
-                  required
-                />
-                      </Autocomplete>
+                    <div className="input-div">
+                      <span>
+                        <img src={location} alt="not found" />
+                      </span>
+                      <input
+                        type="text"
+                        className="form-control input-text"
+                        placeholder="Address"
+                        name="dropLocation"
+                        value={Info.dropLocation}
+                        onChange={handleChange}
+                        required
+                      />
+                    </div>
+                  </Autocomplete>
                 </LoadScript>
               </div>
 
@@ -182,15 +199,31 @@ function Home() {
                 <label htmlFor="datetime" className="form-label">
                   Date & Time
                 </label>
-                <input
-                  type="datetime-local" // Combined date and time input
+                <div className="input-div">
+                  <span>
+                    <img src={calender} alt="not found" />
+                  </span>
+                  <DatePicker
+                    selected={Info.dateTime}
+                    onChange={(date) => handleDate(date, "dateTime")}
+                    showTimeSelect
+                    timeFormat="HH:mm"
+                    timeIntervals={15}
+                    dateFormat="MMMM d, yyyy h:mm aa"
+                    placeholderText="DD/MM/YYYY"
+                    minDate={new Date()}
+                    className="datapicker"
+                  />
+                  {/* <input
+                  type="datetime-local" 
                   className="form-control input-text"
                   name="dateTime"
                   value={Info.dateTime}
                   onChange={handleChange}
                   required
-                  min={getCurrentDateTime()}
-                />
+                
+                /> */}
+                </div>
               </div>
               <div className="col-md-3 form-contain">
                 <label htmlFor="category" className="form-label">
@@ -224,6 +257,7 @@ function Home() {
       </section>
 
       <section className="chooseUs">
+        {/* r customheader */}
         <div className="container customheader">
           <div className=" row bg-white media-bg-white">
             <div className="col-md-12 ">
@@ -236,12 +270,15 @@ function Home() {
             </div>
             <div className="container">
               <div className="row pb-5">
-                <div className="col-md-3">
-                  <img
-                    src={img01}
-                    alt="not found"
-                    className="online-booking-img"
-                  />
+                <div className="d-flex justify-content-evenly">
+                <div className="">
+                  <div className="d-flex justify-content-center">
+                    <img
+                      src={img01}
+                      alt="not found"
+                      className="online-booking-img"
+                    />
+                  </div>
                   <div className="explore-content p-3">
                     <h3 className="text-title">Easy Online Booking</h3>
                     <p className="paragraph font-dosis p-3">
@@ -250,13 +287,14 @@ function Home() {
                     </p>
                   </div>
                 </div>
-                <div className="col-md-3">
-                  <img
-                    src={img02}
-                    alt="not found"
-                    className="professionaldriver-img"
-                  />
-
+                <div className="">
+                  <div className="d-flex justify-content-center">
+                    <img
+                      src={img02}
+                      alt="not found"
+                      className="professionaldriver-img"
+                    />
+                  </div>
                   <div className="explore-content p-3">
                     <h3 className="text-title">Professional Drivers</h3>
                     <p className="paragraph font-dosis p-3">
@@ -265,8 +303,14 @@ function Home() {
                     </p>
                   </div>
                 </div>
-                <div className="col-md-3 ">
-                  <img src={img03} alt="not found" className="carbrands-img" />
+                <div className=" ">
+                  <div className="d-flex justify-content-center">
+                    <img
+                      src={img03}
+                      alt="not found"
+                      className="carbrands-img"
+                    />
+                  </div>
                   <div className="explore-content p-3">
                     <h3 className="text-title">Variety of Cars Brands</h3>
                     <p className="paragraph font-dosis p-3">
@@ -275,12 +319,14 @@ function Home() {
                     </p>
                   </div>
                 </div>
-                <div className="col-md-3 ">
-                  <img
-                    src={img04}
-                    alt="not found"
-                    className="paymentcard-img"
-                  />
+                <div className="">
+                  <div className="d-flex justify-content-center">
+                    <img
+                      src={img04}
+                      alt="not found"
+                      className="paymentcard-img"
+                    />
+                  </div>
                   <div className="explore-content  p-3">
                     <h3 className="text-title">Online Payment</h3>
                     <p className="paragraph font-dosis p-3">
@@ -289,6 +335,8 @@ function Home() {
                     </p>
                   </div>
                 </div>
+                </div>
+               
               </div>
             </div>
           </div>
@@ -310,7 +358,9 @@ function Home() {
                   typesetting industry. Lorem Ipsum has been the industry's
                   standard dummy text ever since the 1500s, when an unknown
                   printer took a galley of type and scrambled it to make a type
-                  specimen book.
+                  specimen book.Lorem Ipsum is simply dummy text of the printing and
+                  typesetting industry.Lorem Ipsum is simply dummy text of the printing and
+                  typesetting industry.
                 </p>
 
                 <button className="aboutus-btn font-inria">Book a ride</button>
@@ -321,8 +371,8 @@ function Home() {
       </section>
 
       <section className="service-container">
-        <div className="container mt-5 pt-5">
-          <div className="row">
+        <div className="container customheader mt-5 pt-5">
+          <div className="row ">
             <h3>Our Services</h3>
             <p>our aims is to fill a gap in niche market of Trade</p>
           </div>

@@ -28,7 +28,7 @@ body {
 }
 
 .stepper {
-  width: 70%;
+  width: 64%;
   position: relative;
   display: flex;
   justify-content: space-between;
@@ -88,9 +88,10 @@ body {
   margin: 0px 100px;
 }
 
-.bookride-container .signup-logo-container{
+.bookride-container .signup-logo-container {
   width: 230px;
   text-align: left;
+  padding-bottom: 80px;
 }
 .signup-logo-container img{
   width: 100%;

@@ -102,7 +102,7 @@
     font-size: 32px;
     font-weight: 600;
     text-align: left;
-    padding: 50px 0px 0px 0px;
+    padding: 40px 0px 0px 0px;
 
 }
 
@@ -123,13 +123,36 @@
     padding: 20px 0px 0px 0px;
 }
 
-.provide-additional-form-container .form-control {
+.provide-additional-form-container .form-control ,
+.chauffer-notes-field .form-control,
+.cost-center-field .form-control
+{
     border-radius: 0 !important;
-    border: 1px solid #D7D2BD;
-    padding: 20px 0px;
+    border: 1px solid #D7D2BD !important;
+    padding: 20px 10px;
     font-family: 'Inter', sans-serif;
+    font-size: 20px;
 }
-
+.chauffer-notes-field .form-control,
+.cost-center-field .form-control {
+    padding: 0px 0px 0px 10px;
+    height: 30vh;
+}
+.someone-else .form-label{
+    font-family: "Inter", sans-serif;
+    font-size: 24px;
+    font-weight: 400;
+    line-height: 29px;
+    color: #000000;
+}
+.someone-else .form-control {
+    border-radius: 0 !important;
+    border: 1px solid #D7D2BD !important;
+    padding: 20px 10px;
+    font-family: 'Inter', sans-serif;
+  
+    font-size: 20px;
+} 
 .flight-field p,
 .chauffer-notes-field p,
 .cost-center-field p {
@@ -144,11 +167,6 @@
 /* .cost-center-field p{
     padding: 0px 0px 70px 0px;
 } */
-.chauffer-notes-field .form-control,
-.cost-center-field .form-control {
-    padding: 50px 0px;
-
-}
 
 /* buttons  */
 .skip-pickup-btn {

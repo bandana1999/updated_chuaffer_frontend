@@ -13,7 +13,7 @@
     padding: 30px 0px 60px 0px;
 }
 .login-form{
-    border:1px solid #CACACA;
+    border:1px solid #CACACA ;
     /* padding: 30px; */
     /* text-align: left; */
     font-family: "Inter", sans-serif;
@@ -36,7 +36,7 @@
     padding-top: 30px;
 }
 .login-form input{
-    border: 1px solid #D7D2BD;
+    border: 1px solid #D7D2BD !important;
     padding: 16px;
     border-radius: 1px;
     margin-bottom: 20px;

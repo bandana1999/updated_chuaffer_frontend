@@ -26,12 +26,8 @@ const CHECKOUT_STEPS = [
     },
   ];
 
-
-
-
 const BookRide = () => {
   const navigate = useNavigate();
-
 
 useEffect(() => {
   
@@ -51,7 +47,7 @@ useEffect(() => {
 
   return (
     <div className="bookride-container">
-      <section className="">
+      <section className="container">
         <div className="row">
           <div className="col-md-12">
             <div className="signup-logo-container">

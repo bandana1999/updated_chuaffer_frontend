@@ -33,7 +33,7 @@
 }
 
 .signup-form input{
-    border: 1px solid #D7D2BD;
+    border: 1px solid #D7D2BD !important;
     padding: 16px;
     border-radius: 1px;
     /* margin-bottom: 30px; */

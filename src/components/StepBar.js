@@ -75,7 +75,7 @@ function MultiStepForm({ stepsConfig, actionIndex }) {
         return prevStep;
       } else {
         if(bookingStage === 3) dispatch(intialStage())
-        dispatch(nextStage());
+        dispatch(nextStage(localStorage.getItem("category")));
         return prevStep + 1;
       }
     });
@@ -86,7 +86,6 @@ function MultiStepForm({ stepsConfig, actionIndex }) {
       if (prevStep === 1) {
         return prevStep;
       } else {
-        dispatch(previousStage());
         setIsComplete(false);
         return prevStep - 1;
       }
@@ -140,7 +139,8 @@ function MultiStepForm({ stepsConfig, actionIndex }) {
           </div>
         </div>
 
-        <section className="row">
+        <section className="container">
+        <div className="row">
           <div className="col-md-12">
             <div className="mst">
               <p>
@@ -153,7 +153,9 @@ function MultiStepForm({ stepsConfig, actionIndex }) {
               <p>Estimated arrival at {formattedTime} (MST) 134.3 km</p>
             </div>
           </div>
-        </section>
+        </div>
+        </section>  
+
 
         <ActiveComponent
           handleNextButon={handleNext}

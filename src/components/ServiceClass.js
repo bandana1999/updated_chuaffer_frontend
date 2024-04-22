@@ -24,30 +24,17 @@ const ServiceClass = ({handleNextButon}) => {
     fetchData();
   }, []);
 
-
-  const [selectedVehicle, setSelectedVehicle] = useState(null);
-
-  const handleVehicleClick = (vehicle) => {
-    setSelectedVehicle(selectedVehicle === vehicle ? null : vehicle);
-    };
-
-
-    const handleSubmit = () =>{
-      handleNextButon();
-      localStorage.setItem("selected vehicle" , JSON.stringify(selectedVehicle ))
-    }
-
   return (
     <div className="serviceclass-container">
       <section className="container">
         {/*above code is common in pickup component  */}
 
-        <section className="row"> 
+        <section className="row">
           { vehicleData?.map((vehicle) => {
             return (
-              <div key={vehicle._id} className="col-md-6">
-                <div className= 'business-class-container'>                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                      
-                  <div className= {`car-container ${selectedVehicle === vehicle ? 'selected' : ''}`}   onClick={() => handleVehicleClick(vehicle)}>
+              <div key={vehicle._id} className="col-md-6 ">
+                <div className="business-class-container">
+                  <div className="car-container">
                     <div>
                       <img src={car1} alt="not found" />
                     </div>
@@ -77,6 +64,7 @@ const ServiceClass = ({handleNextButon}) => {
             <div className="all-class-include-container">
               <div className="all-class-include font-inter">
                 <p>All classes include:</p>
+                <hr style={{color:"#D9D9D9"}}/>
                 <ul>
                   <li>Free cancellation up until 1 hour before pickup</li>
                   <li>Free 15 minutes of wait time</li>
@@ -93,6 +81,7 @@ const ServiceClass = ({handleNextButon}) => {
             <div className="please-note-container">
               <div className="please-note-include font-inter">
                 <p>Please note:</p>
+                <hr style={{color:"#D9D9D9"}}/>
                 <ul>
                   <li>
                     Guest/luggage capacities must be abided by for safety
@@ -113,7 +102,7 @@ const ServiceClass = ({handleNextButon}) => {
           <div className="col-md-3 offset-md-9">
             <button
               className="continue-btn"
-              onClick={handleSubmit}
+              onClick={handleNextButon}
             >
               Continue
             </button>

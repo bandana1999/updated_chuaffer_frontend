@@ -116,3 +116,8 @@
     font-size: 20px;
     font-weight: 600;
 }
+
+.selected {
+    border: 1px solid #00980F !important; /* Add your desired styling for the selected state */
+    box-shadow: 2px rgb(206, 206, 242) !important;
+  }

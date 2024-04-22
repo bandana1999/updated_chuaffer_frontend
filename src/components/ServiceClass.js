@@ -24,17 +24,30 @@ const ServiceClass = ({handleNextButon}) => {
     fetchData();
   }, []);
 
+
+  const [selectedVehicle, setSelectedVehicle] = useState(null);
+
+  const handleVehicleClick = (vehicle) => {
+    setSelectedVehicle(selectedVehicle === vehicle ? null : vehicle);
+    };
+
+
+    const handleSubmit = () =>{
+      handleNextButon();
+      localStorage.setItem("selected vehicle" , JSON.stringify(selectedVehicle ))
+    }
+
   return (
     <div className="serviceclass-container">
       <section className="container">
         {/*above code is common in pickup component  */}
 
-        <section className="row">
+        <section className="row"> 
           { vehicleData?.map((vehicle) => {
             return (
-              <div key={vehicle._id} className="col-md-6 ">
-                <div className="business-class-container">
-                  <div className="car-container">
+              <div key={vehicle._id} className="col-md-6">
+                <div className= 'business-class-container'>                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                      
+                  <div className= {`car-container ${selectedVehicle === vehicle ? 'selected' : ''}`}   onClick={() => handleVehicleClick(vehicle)}>
                     <div>
                       <img src={car1} alt="not found" />
                     </div>
@@ -102,7 +115,7 @@ const ServiceClass = ({handleNextButon}) => {
           <div className="col-md-3 offset-md-9">
             <button
               className="continue-btn"
-              onClick={handleNextButon}
+              onClick={handleSubmit}
             >
               Continue
             </button>

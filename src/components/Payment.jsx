@@ -79,17 +79,18 @@ const PaymentCard = ({ handleNextButon, handlePreviousButton }) => {
   };
 
 
-
   const datafetchingForBookRide = () => {
     const [datePart, timePart] = localStorage.getItem("dateTime").split("T");
+    const vehicleId = JSON.parse(localStorage.getItem("selected vehicle"))._id
+    console.log("vehicleId",vehicleId)
 
     setRideBookingData({
-      pickUpLocation: localStorage.getItem("pickUpLocation"),
-      dropLocation: localStorage.getItem("dropLocation"),
+      pickUpLocation: localStorage.getItem("pickUpLocationCoordinates"),
+      dropLocation: localStorage.getItem("dropLocationCoordinates"),
       date: datePart,
       time: timePart,
       userId: localStorage.getItem("user_id"),
-      vehicleId: "6614ef4de836de9e28433bcf",
+      vehicleId: vehicleId,
       bookingFor: "Myself",
       flightNumber: userDetails.flight_no,
       notesForChauffer: userDetails.chauffer_notes,

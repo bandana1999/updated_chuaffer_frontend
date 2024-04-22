@@ -26,8 +26,12 @@ const CHECKOUT_STEPS = [
     },
   ];
 
+
+
+
 const BookRide = () => {
   const navigate = useNavigate();
+
 
 useEffect(() => {
   

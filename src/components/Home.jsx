@@ -20,16 +20,19 @@ import { LoadScript, Autocomplete } from "@react-google-maps/api";
 import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
 
+import axios from "axios";
+import {  LoadScript, Autocomplete } from "@react-google-maps/api"
 const categories = ["Ride", "Comfort", "City to city", "Airport Transfer"];
 
 function Home() {
   const navigate = useNavigate();
   const token = localStorage.getItem("token");
-  // const [address, setAddress] = useState("");
-  // const [coordinates, setCoordinates] = useState(null);
+  const [coordinates ,setCoordinates ] = useState({
+    pickUpLocation: "",
+    dropLocation:"",
+  })
 
   const YOUR_GOOGLE_MAPS_API_KEY = "AIzaSyCZ0UycRv9Fy9PMDBY-uoU_SkXZGnmjP18";
-
   const [isLogin, setIsLogin] = useState(false);
 
   useEffect(() => {
@@ -56,38 +59,39 @@ function Home() {
   const [Info, setInfo] = useState({
     pickUpLocation: "",
     dropLocation: "",
-    dateTime: "",
+    dateTime: getCurrentDateTime(),
     category: "",
   });
 
-  const handlePlaceSelect = (place, name) => {
-    // setAddress(place.formatted_address);
+  const handlePlaceSelect = (place ,name) => {
     const { lat, lng } = place.geometry.location;
-    // setCoordinates({ lat: lat(), lng: lng() })
-    setInfo((Info) => ({ ...Info, [name]: place.formatted_address }));
-    console.log("name from google adrress", Info);
+    setInfo(Info =>({ ...Info, [name] : place.formatted_address}));
+    setCoordinates(prevCoordinates =>({...prevCoordinates , [name] : `${lat()},${lng()}` }))
     console.log("Selected place:", place.formatted_address);
-    console.log("Coordinates:", `${lat()},${lng()}`);
+    console.log('Coordinates:name', `${name} ${lat()},${lng()}` );
   };
+
 
   const handleChange = (e) => {
     setInfo({ ...Info, [e.target.name]: e.target.value });
   };
-  const handleDate = (date, name) => {
-    setInfo({ ...Info, [name]: date });
-  };
+
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
       const userData = {
         pickUpLocation: Info.pickUpLocation,
         dropLocation: Info.dropLocation,
+        pickUpLocationCoordinates: coordinates.pickUpLocation,
+        dropLocationCoordinates: coordinates.dropLocation,
         dateTime: Info.dateTime,
         category: Info.category,
       };
 
       localStorage.setItem("pickUpLocation", userData.pickUpLocation);
       localStorage.setItem("dropLocation", userData.dropLocation);
+      localStorage.setItem("pickUpLocationCoordinates", userData.pickUpLocationCoordinates);
+      localStorage.setItem("dropLocationCoordinates", userData.dropLocationCoordinates);
       localStorage.setItem("dateTime", userData.dateTime);
       localStorage.setItem("category", userData.category);
 
@@ -129,7 +133,7 @@ function Home() {
               <div className="col-md-3 form-contain">
                 <label className="form-label ">From</label>
                 <LoadScript
-                  googleMapsApiKey={YOUR_GOOGLE_MAPS_API_KEY}
+                  googleMapsApiKey= {YOUR_GOOGLE_MAPS_API_KEY} 
                   libraries={["places"]}
                 >
                   <Autocomplete
@@ -164,7 +168,7 @@ function Home() {
                   To
                 </label>
                 <LoadScript
-                  googleMapsApiKey={YOUR_GOOGLE_MAPS_API_KEY}
+                  googleMapsApiKey={YOUR_GOOGLE_MAPS_API_KEY} 
                   libraries={["places"]}
                 >
                   <Autocomplete

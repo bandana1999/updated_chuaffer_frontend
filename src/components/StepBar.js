@@ -75,7 +75,7 @@ function MultiStepForm({ stepsConfig, actionIndex }) {
         return prevStep;
       } else {
         if(bookingStage === 3) dispatch(intialStage())
-        dispatch(nextStage(localStorage.getItem("category")));
+        dispatch(nextStage());
         return prevStep + 1;
       }
     });
@@ -86,6 +86,7 @@ function MultiStepForm({ stepsConfig, actionIndex }) {
       if (prevStep === 1) {
         return prevStep;
       } else {
+        dispatch(previousStage());
         setIsComplete(false);
         return prevStep - 1;
       }

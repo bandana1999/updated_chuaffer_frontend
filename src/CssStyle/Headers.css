@@ -5,7 +5,6 @@ body {
     font-size: 14px;
     background-color: #fff;
 }
-
 /* Custom CSS */
 .bg-image {
     background-image: url('../cab_images/Component7.png');
@@ -233,12 +232,10 @@ body {
     text-align: left;
 
 }
-
 .search-container {
     text-align: center;
 
 }
-
 .search-btn {
     text-align: center;
     background-color: #CC4452;
@@ -570,7 +567,6 @@ div#navbarNavDropdown {
 .owl-nav .owl-prev .fa .fa-arrow-left {
     display: none !important;
 }
-
 /* Navbar responsive */
 .navbar-toggler {
     border: none;

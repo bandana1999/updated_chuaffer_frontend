@@ -1,10 +1,11 @@
 import React, { useState, useEffect } from 'react';
 
 const AddressFromLatLng = ({ latitude, longitude }) => {
+  console.log("latitudefromAddressFromLatLng" , latitude )
   const [address, setAddress] = useState('');
   const apiKey = "AIzaSyCZ0UycRv9Fy9PMDBY-uoU_SkXZGnmjP18"
-  const apiUrl = `https://nominatim.openstreetmap.org/reverse?format=json&lat=${22.7195687}&lon=${75.8577258}`
-  // const apiUrl = `https://maps.googleapis.com/maps/api/place/details/json?latlng=${latitude},${longitude}&key=${apiKey}`;
+  // const apiUrl = `https://nominatim.openstreetmap.org/reverse?format=json&lat=${latitude}&lon=${longitude}`
+  const apiUrl = `https://maps.googleapis.com/maps/api/place/details/json?latlng=${latitude},${longitude}&key=${apiKey}`;
   // const apiUrl = `https://api.mapbox.com/geocoding/v5/mapbox.places/${longitude},${latitude}.json`;
 
 

@@ -28,7 +28,7 @@ body {
 }
 
 .stepper {
-  width: 64%;
+  width: 70%;
   position: relative;
   display: flex;
   justify-content: space-between;

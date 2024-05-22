@@ -19,9 +19,6 @@ import Header from "./Header";
 import { LoadScript, Autocomplete } from "@react-google-maps/api";
 import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
-
-import axios from "axios";
-import {  LoadScript, Autocomplete } from "@react-google-maps/api"
 const categories = ["Ride", "Comfort", "City to city", "Airport Transfer"];
 
 function Home() {
@@ -59,7 +56,7 @@ function Home() {
   const [Info, setInfo] = useState({
     pickUpLocation: "",
     dropLocation: "",
-    dateTime: getCurrentDateTime(),
+    dateTime: "",
     category: "",
   });
 
@@ -74,6 +71,10 @@ function Home() {
 
   const handleChange = (e) => {
     setInfo({ ...Info, [e.target.name]: e.target.value });
+  };
+
+  const handleDate = (date, name) => {
+    setInfo({ ...Info, [name]: date });
   };
 
   const handleSubmit = async (e) => {
@@ -198,7 +199,6 @@ function Home() {
                   </Autocomplete>
                 </LoadScript>
               </div>
-
               <div className="col-md-3 form-contain">
                 <label htmlFor="datetime" className="form-label">
                   Date & Time

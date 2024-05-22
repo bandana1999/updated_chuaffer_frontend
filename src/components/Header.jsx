@@ -1,7 +1,7 @@
 import React from "react";
 import image1 from "../cab_images/logo.png";
 import { useState, useEffect } from "react";
-import { useNavigate } from "react-router-dom";
+import { useNavigate ,Link } from "react-router-dom";
 import "../CssStyle/Headers.css";
 
 const Header = () => {
@@ -33,9 +33,9 @@ const Header = () => {
     <div>
       <nav class="navbar navbar-expand-lg navbar-light">
         <div class="container customheader">
-          <a class="navbar-brand" href="#">
+          <Link class="navbar-brand" to="/">
             <img src={image1} alt="not found" className="logo" />
-          </a>
+          </Link>
           <button
             class="navbar-toggler"
             type="button"
@@ -50,58 +50,58 @@ const Header = () => {
           <div class="collapse navbar-collapse" id="navbarSupportedContent">
             <ul class="navbar-nav me-4 mb-2 mb-lg-0">
               <li class="nav-item">
-                <a class="nav-link active" aria-current="page" href="/">
+                <Link class="nav-link active" aria-current="page" to="/">
                   Home
-                </a>
+                </Link>
               </li>
               {/* disabled class remove from li to enable routing */}
               <li class="nav-item">
-                <a class="nav-link" aria-current="page" href="/history">
+                <Link class="nav-link" aria-current="page" to="/history">
                   History
-                </a>
+                </Link>
               </li>
 
               <li class="nav-item">
-                <a
+                <Link
                   class="nav-link "
-                  href="/about"
+                  to="/about"
                   tabindex="-1"
                   aria-disabled="true"
                 >
                   {" "}
                   About Us
-                </a>
+                </Link>
               </li>
               <li class="nav-item">
-                <a
+                <Link
                   class="nav-link "
-                  href="/help"
+                  to="/help"
                   tabindex="-1"
                   aria-disabled="true"
                 >
                   {" "}
                   Help us
-                </a>
+                </Link>
               </li>
               <li class="nav-item">
-                <a
+                <Link
                   class="nav-link "
-                  href="/services"
+                  to="/services"
                   tabindex="-1"
                   aria-disabled="true"
                 >
                   Services
-                </a>
+                </Link>
               </li>
               <li class="nav-item">
-              <a
+              <Link
                   class="nav-link "
-                  href="/cities"
+                  to="/cities"
                   // tabindex="-1"
                   // aria-disabled="true"
                 >
                   Cities
-                </a>
+                </Link>
               </li>
             </ul>
             <form class="d-flex sign-form">
@@ -115,14 +115,14 @@ const Header = () => {
       </nav>
       {/* <nav className="navbar navbar-expand-lg navbar-light ">
           <div className="container customheader">
-            <a className="navbar-brand" href="/">
+            <Link className="navbar-brand" href="/">
               <img
                 src={image1}
                 alt="not found"
                 className="logo"
                 // onClick={() => navigate("/")}
               />
-            </a>
+            </Link>
             <button
               className="navbar-toggler collapsed"
               type="button"
@@ -137,34 +137,34 @@ const Header = () => {
             <div className="collapse navbar-collapse" id="navbarNavDropdown">
               <ul className="navbar-nav">
                 <li className="nav-item">
-                  <a className="nav-link active" href="/">
+                  <Link className="nav-link active" href="/">
                     Home
-                  </a>
+                  </Link>
                 </li>
                 <li className="nav-item">
-                  <a className="nav-link" href="/history">
+                  <Link className="nav-link" href="/history">
                     History
-                  </a>
+                  </Link>
                 </li>
                 <li className="nav-item">
-                  <a className="nav-link" href="/about">
+                  <Link className="nav-link" href="/about">
                     About Us
-                  </a>
+                  </Link>
                 </li>
                 <li className="nav-item">
-                  <a className="nav-link" href="/help">
+                  <Link className="nav-link" href="/help">
                     Help
-                  </a>
+                  </Link>
                 </li>
                 <li className="nav-item">
-                  <a className="nav-link" href="/services">
+                  <Link className="nav-link" href="/services">
                     Services
-                  </a>
+                  </Link>
                 </li>
                 <li className="nav-item">
-                  <a className="nav-link" href="/cities">
+                  <Link className="nav-link" href="/cities">
                     Cities
-                  </a>
+                  </Link>
                 </li>
                 <li className="nav-item">
                   <button className="sign-in-btn" onClick={handleLogin}>
@@ -177,14 +177,14 @@ const Header = () => {
         </nav> */}
       {/* <nav class="navbar navbar-expand-lg navbar-light ">
         <div class="container nav-custom customheader">
-          <a class="navbar-brand" href="/">
+          <Link class="navbar-brand" href="/">
             <img
               src={image1}
               alt="not found"
               className="logo"
               onClick={() => navigate("/")}
             />
-          </a>
+          </Link>
           <button
             class="navbar-toggler collapsed"
             type="button"
@@ -199,36 +199,36 @@ const Header = () => {
           <div class="navbar-collapse collapse" id="navbarSupportedContent">
             <ul class="navbar-nav mb-2 mb-lg-0">
               <li class="active">
-                <a class="nav-link" href="/">
+                <Link class="nav-link" href="/">
                   Home
-                </a>
+                </Link>
               </li>
 
               <li>
-                <a class="nav-link" href="/history">
+                <Link class="nav-link" href="/history">
                   History
-                </a>
+                </Link>
               </li>
 
               <li>
-                <a class="nav-link" href="/about">
+                <Link class="nav-link" href="/about">
                   About Us
-                </a>
+                </Link>
               </li>
               <li>
-                <a class="nav-link" href="/help">
+                <Link class="nav-link" href="/help">
                   Help
-                </a>
+                </Link>
               </li>
               <li>
-                <a class="nav-link" href="/services">
+                <Link class="nav-link" href="/services">
                   Services
-                </a>
+                </Link>
               </li>
               <li>
-                <a class="nav-link" href="/cities">
+                <Link class="nav-link" href="/cities">
                   Cities
-                </a>
+                </Link>
               </li>
             </ul>
             <form class="d-flex">

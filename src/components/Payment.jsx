@@ -119,7 +119,13 @@ const PaymentCard = ({ handleNextButon, handlePreviousButton }) => {
 
     const bookingDone = async () => {
       try {
-        await axios.post(URL, rideBookingData, {headers})
+        await axios.post(URL, rideBookingData,{
+          method: "GET", // or 'POST', 'PUT', 'DELETE', etc.
+          headers: {
+            Authorization: `Bearer ${token}`,
+            "Content-Type": "application/json", // Adjust content type as needed
+          },
+        })
           .then((res) => {
             console.log("Booking DOne", res);
             if (res.data.status === true) {

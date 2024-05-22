@@ -133,6 +133,10 @@ body {
 .form-control {
     border: unset !important;
     width: 80%;
+    border-color: unset !important;
+    outline: 0;
+    box-shadow: unset !important;
+
 }
 
 .form-control:focus {

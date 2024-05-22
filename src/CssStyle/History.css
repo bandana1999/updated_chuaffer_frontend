@@ -1,19 +1,49 @@
-.history-nav{
+.history-container{
+    margin: 50px 100px;
+}
 
+
+.history-nav{
     border: 1px solid black;
 }
 
-.tab-bar{
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    gap: 105px;
-    font-weight: bold;
-    margin: 35px;
-    font-size: 27px;
+.tab-bar-container{
+    margin: 30px 0px;
 }
 
-.tab-bar li{
-    border: 1ps solid black;
+.history-container .tab-bar {
+    display: flex;
+    justify-content: left;
+    align-items: center;
+    gap: 10px;
+    font-weight: bold;
+    padding: 0px;
+    margin: 0px;
+    font-size: 13px;
+    font-weight: 500;
+    border-bottom: 1px solid black;
+  }
+  
+  .history-container .tab-bar li {
+    padding: 12px 30px;
+    background-color: white;
+    color: black;
+    list-style-type: none;
+    border: 1px solid white;
     cursor: pointer;
+    font-size: medium;
+    transition: background-color 0.3s, color 0.3s;
+  }
+  
+  .history-container .tab-bar li.selected-history-tab {
+    background-color: black;
+    color: white;
+  }
+
+.history-bg-image{
+    background-image: url('../cab_images/Component7.png');
+    background-repeat: no-repeat;
+    background-size: cover;
+    height: 35vh;
+
 }

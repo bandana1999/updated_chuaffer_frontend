@@ -1,10 +1,6 @@
 import React from "react";
-import image1 from "../cab_images/logo.png";
 import { useState, useEffect } from "react";
-import { Link } from "react-router-dom";
-import axios from "axios";
-import AddressFromLatLng from "./AddressFromLatLong";
-import { useState, useEffect } from "react";
+import Header from "./Header";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
 import Upcoming from "./HistoryStages/Upcoming";
@@ -18,6 +14,7 @@ const History = () => {
   const token = localStorage.getItem("token");
   const [rideData, setRideData] = useState(null);
   const navigate = useNavigate();
+  const [currentPage, setCurrentPage] = useState("upcoming");
 
   const headers = {
     "Content-Type": "application/json",
@@ -45,8 +42,6 @@ const History = () => {
     fetchData();
   }, []);
 
-  const [currentPage, setCurrentPage] = useState("home");
-
   const renderPage = () => {
     switch (currentPage) {
       case "upcoming":
@@ -66,32 +61,40 @@ const History = () => {
   };
 
   return (
-    <div className="history-container">
-      <header>
-        <nav className="">
-          <ul className="tab-bar">
-            <li
-              className="nav-item"
-              onClick={(e) => handlePageChange(e, "upcoming")}
-            >
-              Upcoming
-            </li>
-            <li
-              className="nav-item"
-              onClick={(e) => handlePageChange(e, "past")}
-            >
-              Past
-            </li>
-            <li
-              className="nav-item"
-              onClick={(e) => handlePageChange(e, "cancel")}
-            >
-              Cancel
-            </li>
-          </ul>
-        </nav>
-      </header>
-      <main>{renderPage()}</main>
+    <div className="">
+      <div className="history-bg-image w-100%">
+        <Header />
+        <div className="text-content customheader">
+          <div className="text-div">
+            <div className="text-heading-first">
+              <h2> History</h2>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div className="history-container">
+
+        <header>
+          <nav className="tab-bar-container">
+            <ul className="tab-bar">
+              {["upcoming", "past", "cancel"].map((tab) => (
+                <li
+                  key={tab}
+                  className={`nav-item ${
+                    currentPage === tab ? "selected-history-tab" : ""
+                  }`}
+                  onClick={(e) => handlePageChange(e, tab)}
+                >
+                  {tab.charAt(0).toUpperCase() + tab.slice(1)}
+                </li>
+              ))}
+            </ul>
+          </nav>
+        </header>
+
+        <main>{renderPage()}</main>
+      </div>
     </div>
   );
 };
